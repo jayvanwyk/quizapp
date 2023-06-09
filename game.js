@@ -3,6 +3,8 @@ const choices = Array.from(document.querySelectorAll('.choice-text'));
 const progressTextElement = document.getElementById('progressText');
 const scoreElement = document.getElementById('score');
 const progressBarElement = document.getElementById('progressBarFull');
+const loader = document.getElementById('loader');
+const game = document.getElementById('game');
 
 
 let currentQuestion = {};
@@ -41,7 +43,7 @@ fetch("https://opentdb.com/api.php?amount=20&category=9&difficulty=medium&type=m
     startGame();
 }).catch(err=>{
     console.error(err);
-})
+});
 
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 20;
@@ -51,6 +53,8 @@ startGame = () =>{
     score = 0;
     availableQuestions = [...questions];
     getNewQuestion();
+    game.classList.remove('hidden');
+    loader.classList.add('hidden');
 }
 
 getNewQuestion = () =>{
